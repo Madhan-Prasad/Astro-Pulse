@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroDaily Pro</title>
+    <style>
+        body { background: #0b0e14; color: #e6edf3; font-family: sans-serif; padding: 20px; margin: 0; }
+        .header { border-bottom: 1px solid #30363d; padding-bottom: 15px; margin-bottom: 20px; }
+        .card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .title { color: #58a6ff; font-weight: bold; text-decoration: none; font-size: 1.1rem; }
+        .ai-summary { font-style: italic; color: #7ee787; margin-top: 10px; font-size: 0.9rem; border-left: 2px solid #238636; padding-left: 10px; }
+        .btn { display: inline-block; margin-top: 10px; color: #8b949e; font-size: 0.8rem; }
+        .loader { text-align: center; color: #8b949e; margin-top: 50px; }
+    </style>
+</head>
+<body>
+    <div class="header"><h1>🔭 AstroDaily Pro</h1></div>
+    <div id="app"><div class="loader">Loading latest research...</div></div>
+
+    <script>
+        async function load() {
+            try {
+                const res = await fetch('/api/fetch-papers');
+                const data = await res.json();
+                const container = document.getElementById('app');
+                container.innerHTML = data.map(p => `
+                    <div class="card">
+                        <a href="${p.link}" target="_blank" class="title">${p.title}</a>
+                        <div class="ai-summary"><b>AI Insight:</b> ${p.aiSummary}</div>
+                        <a href="${p.link}" class="btn">Read Full PDF →</a>
+                    </div>
+                `).join('');
+            } catch (e) {
+                document.getElementById('app').innerHTML = "Failed to load papers.";
+            }
+        }
+        load();
+    </script>
+</body>
+</html>
