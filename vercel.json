@@ -1,0 +1,3 @@
+{
+  "rewrites": [{ "source": "/api/fetch-papers", "destination": "/api/fetch-papers.js" }]
+}
