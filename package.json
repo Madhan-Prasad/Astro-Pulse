@@ -1,0 +1,9 @@
+{
+  "name": "astro-arxiv-pro",
+  "version": "1.0.0",
+  "dependencies": {
+    "@google/generative-ai": "^0.3.0",
+    "feedparser": "^2.2.10",
+    "node-fetch": "^2.6.7"
+  }
+}
